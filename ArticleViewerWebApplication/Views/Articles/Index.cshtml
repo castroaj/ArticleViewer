@@ -1,0 +1,57 @@
+﻿@model IEnumerable<ArticleViewerWebApplication.Models.Article>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.author)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.img_caption)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.header)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.body)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.author)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.img_caption)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.header)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.body)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.articleId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.articleId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.articleId })
+        </td>
+    </tr>
+}
+
+</table>
