@@ -10,9 +10,6 @@ namespace ArticleViewerWebApplication.DB
     {
         public ArticleViewerContext() : base("ArticleViewerContext")
         { }
-
-
-        public DbSet<User> users { get; set; }
         public DbSet<Article> articles { get; set; }
         public DbSet<Comment> comments { get; set; }
 
@@ -25,8 +22,6 @@ namespace ArticleViewerWebApplication.DB
                 cs.MapRightKey("CommentRefId");
                 cs.ToTable("ArticleComment");
             });
-
-            modelBuilder.Entity<User>().ToTable("User");
         }
 
         public static ArticleViewerContext Create()

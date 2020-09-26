@@ -54,9 +54,9 @@ namespace ArticleViewerWebApplication
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "652378638742601",
+               appSecret: "db311876f4976e3c909b6e24fde37689");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{

@@ -9,21 +9,25 @@ using System.Web.Mvc;
 using ArticleViewerWebApplication.DB;
 using ArticleViewerWebApplication.Models;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 
 namespace ArticleViewerWebApplication.Controllers
 {
-    public class ArticlesController : Controller
+    [Authorize]
+    public class MyArticlesController : Controller
     {
-        private ArticleViewerContext db = new ArticleViewerContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Articles
+        // GET: MyArticles
         public ActionResult Index()
         {
-            return View(db.articles.ToList());
+            var userId = User.Identity.GetUserId();
+
+            var articles = db.articles.Where(a => a.userId.Equals(userId)).ToList();
+
+            return View(articles);
         }
 
-        // GET: Articles/Details/5
+        // GET: MyArticles/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -38,25 +42,24 @@ namespace ArticleViewerWebApplication.Controllers
             return View(article);
         }
 
-        // GET: Articles/Create
+        // GET: MyArticles/Create
         public ActionResult Create()
         {
-            string userId = System.Web.HttpContext.Current.User.Identity.GetUserId();
-
             return View();
         }
 
-        // POST: Articles/Create
+        // POST: MyArticles/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "articleId,author,date,img_caption,header,body")] Article article)
+        public ActionResult Create([Bind(Include = "articleId,userId,author,date,img_caption,header,body")] Article article)
         {
             if (ModelState.IsValid)
             {
-                string userId = System.Web.HttpContext.Current.User.Identity.GetUserId();
-                article.userId = userId;
+                article.userId = User.Identity.GetUserId();
+                article.date = DateTime.Now;
+
                 db.articles.Add(article);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -65,7 +68,7 @@ namespace ArticleViewerWebApplication.Controllers
             return View(article);
         }
 
-        // GET: Articles/Edit/5
+        // GET: MyArticles/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -80,12 +83,12 @@ namespace ArticleViewerWebApplication.Controllers
             return View(article);
         }
 
-        // POST: Articles/Edit/5
+        // POST: MyArticles/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "articleId,author,date,img_caption,header,body")] Article article)
+        public ActionResult Edit([Bind(Include = "articleId,userId,author,date,img_caption,header,test,body")] Article article)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +99,7 @@ namespace ArticleViewerWebApplication.Controllers
             return View(article);
         }
 
-        // GET: Articles/Delete/5
+        // GET: MyArticles/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -111,7 +114,7 @@ namespace ArticleViewerWebApplication.Controllers
             return View(article);
         }
 
-        // POST: Articles/Delete/5
+        // POST: MyArticles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

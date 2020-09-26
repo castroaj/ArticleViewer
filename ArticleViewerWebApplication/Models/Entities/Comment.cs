@@ -12,6 +12,8 @@ namespace ArticleViewerWebApplication.Models.Entities
         [Key]
         public int commmentId { get; set; }
 
+        public string userId { get; set; }
+
         public DateTime date { get; set; }
 
         public int likes { get; set; }

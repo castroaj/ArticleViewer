@@ -29,6 +29,9 @@ namespace ArticleViewerWebApplication.Models
         {
         }
 
+        public DbSet<Article> articles { get; set; }
+        public DbSet<Comment> comments { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

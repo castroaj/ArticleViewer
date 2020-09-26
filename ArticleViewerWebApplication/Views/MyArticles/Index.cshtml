@@ -6,8 +6,14 @@
 
 <h2>Index</h2>
 
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
 <table class="table">
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.userId)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.author)
         </th>
@@ -25,6 +31,9 @@
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.userId)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.author)
         </td>
@@ -46,17 +55,3 @@
 }
 
 </table>
-
-<div style="margin:50px">
-    @foreach (var item in Model)
-    {
-        <h1>@Html.DisplayFor(modelItem => item.header)</h1>
-        <h3>@Html.DisplayFor(modelItem => item.author)</h3>
-
-        <p>@Html.DisplayFor(ModelItem => item.body)</p>
-
-    }
-</div>
-
-
-

@@ -13,7 +13,7 @@ namespace ArticleViewerWebApplication.DB
         {
             var articles = new List<Article>
             {
-                new Article{articleId=1, author="Test", date=DateTime.Now, body="Body", header="Header", img_caption="Caption"}
+                new Article{articleId=1, author="Test", date=DateTime.Now, body="Body", header="Header"}
             };
             articles.ForEach(a => context.articles.Add(a));
 

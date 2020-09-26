@@ -19,11 +19,7 @@ namespace ArticleViewerWebApplication.Models
 
         public DateTime date { get; set; }
 
-        public string img_caption { get; set; }
-
         public string header { get; set; }
-
-        public int test { get; set; }
 
         public string body { get; set; }
 
