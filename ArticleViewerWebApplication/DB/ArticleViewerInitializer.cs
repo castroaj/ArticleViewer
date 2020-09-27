@@ -7,9 +7,9 @@ using ArticleViewerWebApplication.Models.Entities;
 
 namespace ArticleViewerWebApplication.DB
 {
-    public class ArticleViewerInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<ArticleViewerContext>
+    public class ArticleViewerInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<ApplicationDbContext>
     {
-        protected override void Seed(ArticleViewerContext context)
+        protected override void Seed(ApplicationDbContext context)
         {
             var articles = new List<Article>
             {

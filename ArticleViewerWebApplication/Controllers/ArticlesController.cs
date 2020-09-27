@@ -15,7 +15,7 @@ namespace ArticleViewerWebApplication.Controllers
 {
     public class ArticlesController : Controller
     {
-        private ArticleViewerContext db = new ArticleViewerContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Articles
         public ActionResult Index()
@@ -35,33 +35,6 @@ namespace ArticleViewerWebApplication.Controllers
             {
                 return HttpNotFound();
             }
-            return View(article);
-        }
-
-        // GET: Articles/Create
-        public ActionResult Create()
-        {
-            string userId = System.Web.HttpContext.Current.User.Identity.GetUserId();
-
-            return View();
-        }
-
-        // POST: Articles/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "articleId,author,date,img_caption,header,body")] Article article)
-        {
-            if (ModelState.IsValid)
-            {
-                string userId = System.Web.HttpContext.Current.User.Identity.GetUserId();
-                article.userId = userId;
-                db.articles.Add(article);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
             return View(article);
         }
 
@@ -94,32 +67,6 @@ namespace ArticleViewerWebApplication.Controllers
                 return RedirectToAction("Index");
             }
             return View(article);
-        }
-
-        // GET: Articles/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Article article = db.articles.Find(id);
-            if (article == null)
-            {
-                return HttpNotFound();
-            }
-            return View(article);
-        }
-
-        // POST: Articles/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Article article = db.articles.Find(id);
-            db.articles.Remove(article);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

@@ -59,6 +59,7 @@ namespace ArticleViewerWebApplication.Controllers
             {
                 article.userId = User.Identity.GetUserId();
                 article.date = DateTime.Now;
+                article.author = User.Identity.GetUserName();
 
                 db.articles.Add(article);
                 db.SaveChanges();

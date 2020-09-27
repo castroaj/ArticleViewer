@@ -4,59 +4,104 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.author)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.header)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.body)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.author)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.header)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.body)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.articleId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.articleId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.articleId })
-        </td>
-    </tr>
-}
-
-</table>
-
-<div style="margin:50px">
-    @foreach (var item in Model)
-    {
-        <h1>@Html.DisplayFor(modelItem => item.header)</h1>
-        <h3>@Html.DisplayFor(modelItem => item.author)</h3>
-
-        <p>@Html.DisplayFor(ModelItem => item.body)</p>
-
+<style>
+    .cardForm {
+        box-shadow: 0 15px 15px 0 rgba(0, 0, 0, 0.4);
+        margin: 5px;
+        background-color: rgb(240, 240, 240);
     }
-</div>
+
+    h2 {
+        font-size: 1.571em
+    }
+    /* 22px */
+    h3 {
+        font-size: 1.429em
+    }
+    /* 20px */
+    h4 {
+        font-size: 1.286em
+    }
+    /* 18px */
+    h5 {
+        font-size: 1.143em
+    }
+    /* 16px */
+    h6 {
+        font-size: 1em
+    }
+    /* 14px */
+
+    h2, h3, h4, h5, h6 {
+        font-weight: 400;
+        line-height: 1.1;
+        margin-bottom: .8em;
+    }
+
+    /* Tables */
+    table {
+        margin: .5em auto 1.5em auto;
+        width: 98%;
+    }
+
+    /* Thead */
+    thead th {
+        padding: .5em .4em;
+        text-align: left;
+    }
+
+    thead td {
+    }
+
+    /* Tbody */
+    tbody td {
+        padding: .5em .4em;
+    }
+
+    tbody th {
+    }
+
+    tbody .alt td {
+    }
+
+    tbody .alt th {
+    }
+
+    /* Tfoot */
+    tfoot th {
+    }
+
+    tfoot td {
+    }
+
+
+</style>
+
+@foreach (var item in Model)
+{
+    <section id="content" class="body">
+        <article class="hentry">
+            <header>
+                <h2 class="entry-title">@item.header</h2>
+            </header>
+
+            <footer class="post-info">
+                <abbr class="published">
+                    @item.date
+                </abbr>
+
+                <address class="vcard author">
+                    By @item.author
+                </address>
+            </footer>
+
+            <div class="entry-content">
+                <p>@item.body</p>
+            </div>
+        </article>
+    </section>
+}
 
 
 
