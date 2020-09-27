@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using ArticleViewerWebApplication.DB;
 using ArticleViewerWebApplication.Models;
+using ArticleViewerWebApplication.Models.Entities;
 using Microsoft.AspNet.Identity;
 
 namespace ArticleViewerWebApplication.Controllers

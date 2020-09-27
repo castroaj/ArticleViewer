@@ -3,10 +3,37 @@ namespace ArticleViewerWebApplication.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class inital : DbMigration
+    public partial class init : DbMigration
     {
         public override void Up()
         {
+            CreateTable(
+                "dbo.Articles",
+                c => new
+                    {
+                        articleId = c.Int(nullable: false, identity: true),
+                        userId = c.String(maxLength: 128),
+                        author = c.String(),
+                        date = c.DateTime(nullable: false),
+                        header = c.String(),
+                        body = c.String(),
+                    })
+                .PrimaryKey(t => t.articleId)
+                .ForeignKey("dbo.AspNetUsers", t => t.userId)
+                .Index(t => t.userId);
+            
+            CreateTable(
+                "dbo.Comments",
+                c => new
+                    {
+                        commmentId = c.Int(nullable: false, identity: true),
+                        userId = c.String(),
+                        date = c.DateTime(nullable: false),
+                        likes = c.Int(nullable: false),
+                        text = c.String(),
+                    })
+                .PrimaryKey(t => t.commmentId);
+            
             CreateTable(
                 "dbo.AspNetRoles",
                 c => new
@@ -49,35 +76,6 @@ namespace ArticleViewerWebApplication.Migrations
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.UserName, unique: true, name: "UserNameIndex");
-            
-            CreateTable(
-                "dbo.Articles",
-                c => new
-                    {
-                        articleId = c.Int(nullable: false, identity: true),
-                        userId = c.String(maxLength: 128),
-                        author = c.String(),
-                        date = c.DateTime(nullable: false),
-                        img_caption = c.String(),
-                        header = c.String(),
-                        test = c.Int(nullable: false),
-                        body = c.String(),
-                    })
-                .PrimaryKey(t => t.articleId)
-                .ForeignKey("dbo.AspNetUsers", t => t.userId)
-                .Index(t => t.userId);
-            
-            CreateTable(
-                "dbo.Comments",
-                c => new
-                    {
-                        commmentId = c.Int(nullable: false, identity: true),
-                        userId = c.String(),
-                        date = c.DateTime(nullable: false),
-                        likes = c.Int(nullable: false),
-                        text = c.String(),
-                    })
-                .PrimaryKey(t => t.commmentId);
             
             CreateTable(
                 "dbo.AspNetUserClaims",
@@ -125,26 +123,26 @@ namespace ArticleViewerWebApplication.Migrations
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.Articles", "userId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.CommentArticles", "Article_articleId", "dbo.Articles");
             DropForeignKey("dbo.CommentArticles", "Comment_commmentId", "dbo.Comments");
-            DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropIndex("dbo.CommentArticles", new[] { "Article_articleId" });
             DropIndex("dbo.CommentArticles", new[] { "Comment_commmentId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
-            DropIndex("dbo.Articles", new[] { "userId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.Articles", new[] { "userId" });
             DropTable("dbo.CommentArticles");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
-            DropTable("dbo.Comments");
-            DropTable("dbo.Articles");
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.Comments");
+            DropTable("dbo.Articles");
         }
     }
 }

@@ -171,18 +171,13 @@
     <Compile Include="Controllers\ArticlesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MyArticlesController.cs" />
-    <Compile Include="DB\ArticleViewerContext.cs" />
     <Compile Include="DB\ArticleViewerInitializer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202009260146369_inital.cs" />
-    <Compile Include="Migrations\202009260146369_inital.Designer.cs">
-      <DependentUpon>202009260146369_inital.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202009260204211_new.cs" />
-    <Compile Include="Migrations\202009260204211_new.Designer.cs">
-      <DependentUpon>202009260204211_new.cs</DependentUpon>
+    <Compile Include="Migrations\202009272000493_init.cs" />
+    <Compile Include="Migrations\202009272000493_init.Designer.cs">
+      <DependentUpon>202009272000493_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\.NET_Default\AccountViewModels.cs" />
@@ -272,11 +267,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202009260146369_inital.resx">
-      <DependentUpon>202009260146369_inital.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202009260204211_new.resx">
-      <DependentUpon>202009260204211_new.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202009272000493_init.resx">
+      <DependentUpon>202009272000493_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

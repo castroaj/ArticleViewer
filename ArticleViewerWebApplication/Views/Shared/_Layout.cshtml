@@ -1,4 +1,7 @@
 ﻿<!DOCTYPE html>
+
+
+
 <html>
 <head>
     <meta charset="utf-8" />
@@ -6,23 +9,24 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 
 </head>
-<body>
+<body class="w3-light-grey">
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Article Viewer", "Index", "Articles", new { area = "" }, new { @class = "navbar-brand" })
+
+                @Html.ActionLink("Home Page", "Index", "Articles", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>
-                        @Html.ActionLink("My Articles", "Index", "MyArticles")
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            @Html.ActionLink("My Articles", "Index", "MyArticles")
+                        }
                     </li>
                 </ul>
                 @Html.Partial("_LoginPartial")
@@ -32,9 +36,6 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>@DateTime.Now.Year - Article Viewer</p>
-        </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
