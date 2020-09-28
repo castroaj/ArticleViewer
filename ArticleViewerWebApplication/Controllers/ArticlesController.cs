@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
-using ArticleViewerWebApplication.DB;
 using ArticleViewerWebApplication.Models;
 using ArticleViewerWebApplication.Models.Entities;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 
 namespace ArticleViewerWebApplication.Controllers
 {
@@ -25,7 +20,6 @@ namespace ArticleViewerWebApplication.Controllers
 
             return View(db.articles.OrderByDescending(a => a.date).ToList());
         }
-
 
         public ActionResult AddComment(string articleId, string text)
         {
@@ -49,13 +43,22 @@ namespace ArticleViewerWebApplication.Controllers
             return View("Index", db.articles.OrderByDescending(a => a.date).ToList());
         }
 
-        protected override void Dispose(bool disposing)
+
+        public ActionResult ViewArticle(int? articleId)
         {
-            if (disposing)
+            if (articleId != null)
             {
-                db.Dispose();
+                Article selectedArticle = db.articles.Where(a => a.articleId == articleId).FirstOrDefault();
+
+                if (selectedArticle == null)
+                {
+                    return View("ErrorPage");
+                }
+
+                return View(selectedArticle);
             }
-            base.Dispose(disposing);
+            return View("ErrorPage");
         }
+
     }
 }

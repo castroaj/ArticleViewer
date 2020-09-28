@@ -4,51 +4,52 @@
     ViewBag.Title = "Home Page";
 }
 
+<link rel="stylesheet" href="~/CSS/Site.css">
+
+
 <body>
 
-    <header class="w3-container w3-center w3-padding-32">
-        <h1><b>Welcome to Article Viewer</b></h1>
-        <h4>Recently posted articles</h4>
+    <header class="w3-container w3-center">
+        <h1 class="header"><b>Welcome to Article Viewer</b></h1>
     </header>
 
     @foreach (var item in Model)
     {
         <div class="w3-col 18 s12">
-            <div class="w3-card-4 w3-margin w3-white">
-                <div class="w3-container">
-                    <div class="w3-section">
-                        <h2>
+            <div class="w3-card-4 w3-white margSmall">
+                <div class="padBig">
+                    <div class="margSmall">
+                        <h2 class="articleTitle">
                             <b>@item.title</b>
                         </h2>
-                        <h5>Posted By: @item.author</h5>
-                        <h5>Date Posted: @item.date</h5>
+                        <h5 class="articleSubfield">Posted By: @item.author</h5>
+                        <h5 class="articleSubfield">Date Posted: @item.date</h5>
+                    </div>
+                    <div class="padMed margMed">
+                        <p class="articleText">@item.articlePreview</p>
+                    </div>
+
+                    <div class="padSmall">
+                        <div class="w3-row">
+                            <div class="w3-col col-md-12 w3-hide-small">
+                                <p>
+                                    <button class="w3-button w3-border" onclick="location.href = '@Url.Action("ViewArticle", "Articles", new { articleId = item.articleId })'; return false;">VIEW FULL ARTICLE >></button>
+                                    <span class="w3-right">
+                                        <button id="commentSection-button-@item.articleId" class="w3-button w3-border" onclick="openCommentSection('@item.articleId')">Show Comments</button>
+                                        <span class="w3-badge">@item.comments.Count</span>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <div class="w3-container">
-                    <p>@item.articlePreview</p>
-                    <div class="w3-row">
-                        <div class="w3-col col-md-8 s12">
-                            <p><button class="w3-button w3-border">VIEW FULL ARTICLE  >></button></p>
-                        </div>
-                        <div class="w3-col col-md-4 w3-hide-small">
-                            <p>
-                                <span class="w3-padding-large w3-right">
-                                    <button id="commentSection-button-@item.articleId" class="w3-button w3-border" onclick="openCommentSection('@item.articleId')">Show Comments</button>
-                                    <span class="w3-badge">@item.comments.Count</span>
-                                </span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
                 <div id="commentSection-@item.articleId" hidden>
                     @foreach (var comment in item.comments)
                     {
-                        <div class="w3-container">
+                        <div class="w3-container w3-margin">
                             <div style="margin: 5px; border:medium">
                                 <div class="w3-section">
-                                    <h5>@comment.text</h5>
+                                    <h4>@comment.text</h4>
                                 </div>
                                 <div class="w3-section">
                                     <span style="opacity:0.40">
@@ -86,7 +87,9 @@
                             </div>
                         }
                     }
+
                 </div>
+
             </div>
         </div>
     }
