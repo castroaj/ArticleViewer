@@ -15,7 +15,8 @@ namespace ArticleViewerWebApplication.Migrations
                         userId = c.String(maxLength: 128),
                         author = c.String(),
                         date = c.DateTime(nullable: false),
-                        header = c.String(),
+                        title = c.String(),
+                        articlePreview = c.String(),
                         body = c.String(),
                     })
                 .PrimaryKey(t => t.articleId)

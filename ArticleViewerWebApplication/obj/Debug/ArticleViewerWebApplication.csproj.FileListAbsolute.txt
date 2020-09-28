@@ -327,3 +327,4 @@ C:\Users\Alexander Castro\source\repos\ArticleViewer\ArticleViewerWebApplication
 C:\Users\Alexander Castro\source\repos\ArticleViewer\ArticleViewerWebApplication\obj\Debug\ArticleViewerWebApplication.pdb
 C:\Users\Alexander Castro\source\repos\ArticleViewer\ArticleViewerWebApplication\obj\Debug\ArticleViewerWebApplication.Migrations.init.resources
 C:\Users\Alexander Castro\source\repos\ArticleViewer\ArticleViewerWebApplication\obj\Debug\ArticleViewerWebApplication.csproj.GenerateResource.cache
+C:\Users\Alexander Castro\source\repos\ArticleViewer\ArticleViewerWebApplication\obj\Debug\ArticleViewerWebApplication.Migrations.Change1.resources

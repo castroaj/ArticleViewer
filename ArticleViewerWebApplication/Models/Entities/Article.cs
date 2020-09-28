@@ -19,7 +19,9 @@ namespace ArticleViewerWebApplication.Models
 
         public DateTime date { get; set; }
 
-        public string header { get; set; }
+        public string title { get; set; }
+
+        public string articlePreview { get; set; }
 
         public string body { get; set; }
 

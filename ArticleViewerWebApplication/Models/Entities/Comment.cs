@@ -12,7 +12,7 @@ namespace ArticleViewerWebApplication.Models.Entities
         [Key]
         public int commmentId { get; set; }
 
-        public string userId { get; set; }
+        public string userName { get; set; }
 
         public DateTime date { get; set; }
 
@@ -26,6 +26,11 @@ namespace ArticleViewerWebApplication.Models.Entities
         public Comment()
         {
             this.articles = new HashSet<Article>();
+        }
+
+        public Comment(Article article)
+        {
+            this.articles = new HashSet<Article>() { article };
         }
     }
 }

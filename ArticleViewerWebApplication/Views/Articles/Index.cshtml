@@ -18,7 +18,7 @@
                 <div class="w3-container">
                     <div class="w3-section">
                         <h2>
-                            <b>@item.header</b>
+                            <b>@item.title</b>
                         </h2>
                         <h5>Posted By: @item.author</h5>
                         <h5>Date Posted: @item.date</h5>
@@ -26,20 +26,100 @@
                 </div>
 
                 <div class="w3-container">
-                    <p>@item.body</p>
+                    <p>@item.articlePreview</p>
                     <div class="w3-row">
                         <div class="w3-col col-md-8 s12">
-                            <p><button class="w3-button w3-padding-large w3-border">VIEW AUTHOR'S PAGE  >></button></p>
+                            <p><button class="w3-button w3-border">VIEW FULL ARTICLE  >></button></p>
                         </div>
-                        <div class="w3-col m4 w3-hide-small">
-                            <p><span class="w3-padding-large w3-right"><b>Comments</b> <span class="w3-badge">@item.comments.Count</span></span></p>
+                        <div class="w3-col col-md-4 w3-hide-small">
+                            <p>
+                                <span class="w3-padding-large w3-right">
+                                    <button id="commentSection-button-@item.articleId" class="w3-button w3-border" onclick="openCommentSection('@item.articleId')">Show Comments</button>
+                                    <span class="w3-badge">@item.comments.Count</span>
+                                </span>
+                            </p>
                         </div>
                     </div>
+                </div>
+
+                <div id="commentSection-@item.articleId" hidden>
+                    @foreach (var comment in item.comments)
+                    {
+                        <div class="w3-container">
+                            <div style="margin: 5px; border:medium">
+                                <div class="w3-section">
+                                    <h5>@comment.text</h5>
+                                </div>
+                                <div class="w3-section">
+                                    <span style="opacity:0.40">
+                                        Author: @comment.userName<br />
+                                        Posted Date: @comment.date<br />
+                                        Likes: @comment.likes<br />
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        using (Html.BeginForm("AddComment", "Articles", FormMethod.Post))
+                        {
+                            <div class="w3-container w3-light-grey">
+                                <div class="form-horizontal w3-margin">
+
+                                    <input name="articleId" value='@item.articleId' hidden />
+
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <label>Add Comment:</label>
+                                            <input name="text" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-md-offset-2 col-md-10">
+                                            <input type="submit" value="Comment" class="btn btn-default" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
                 </div>
             </div>
         </div>
     }
 
 </body>
+
+<script>
+
+    function openCommentSection(articleId) {
+        var cs = document.getElementById('commentSection-' + articleId);
+        var button = document.getElementById('commentSection-button-' + articleId)
+
+        if (cs.hidden == false) {
+            button.innerText = "Show Comments"
+            cs.hidden = true
+        }
+        else {
+            button.innerText = "Hide Comments"
+            cs.hidden = false
+        }
+    }
+
+
+</script>
+
+@if (ViewBag.article != null)
+{
+    <script>
+        var button = document.getElementById('commentSection-button-' + @ViewBag.article).click(@ViewBag.article)
+
+        console.log('click')
+
+    </script>
+}
 
 

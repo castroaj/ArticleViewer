@@ -175,9 +175,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202009272000493_init.cs" />
-    <Compile Include="Migrations\202009272000493_init.Designer.cs">
-      <DependentUpon>202009272000493_init.cs</DependentUpon>
+    <Compile Include="Migrations\202009272314350_init.cs" />
+    <Compile Include="Migrations\202009272314350_init.Designer.cs">
+      <DependentUpon>202009272314350_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009280001208_Change1.cs" />
+    <Compile Include="Migrations\202009280001208_Change1.Designer.cs">
+      <DependentUpon>202009280001208_Change1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\.NET_Default\AccountViewModels.cs" />
@@ -241,8 +245,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Articles\Details.cshtml" />
-    <Content Include="Views\Articles\Edit.cshtml" />
     <Content Include="Views\Articles\Index.cshtml" />
     <Content Include="Views\MyArticles\Create.cshtml" />
     <Content Include="Views\MyArticles\Delete.cshtml" />
@@ -267,8 +269,11 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202009272000493_init.resx">
-      <DependentUpon>202009272000493_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202009272314350_init.resx">
+      <DependentUpon>202009272314350_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009280001208_Change1.resx">
+      <DependentUpon>202009280001208_Change1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

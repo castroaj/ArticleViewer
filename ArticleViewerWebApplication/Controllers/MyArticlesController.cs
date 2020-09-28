@@ -49,12 +49,9 @@ namespace ArticleViewerWebApplication.Controllers
             return View();
         }
 
-        // POST: MyArticles/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "articleId,userId,author,date,img_caption,header,body")] Article article)
+        public ActionResult Create([Bind(Include = "articlePreview,title,body")] Article article)
         {
             if (ModelState.IsValid)
             {
@@ -85,12 +82,10 @@ namespace ArticleViewerWebApplication.Controllers
             return View(article);
         }
 
-        // POST: MyArticles/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "articleId,userId,author,date,img_caption,header,test,body")] Article article)
+        public ActionResult Edit([Bind(Include = "articleId,userId,author,date,articlePreview,title,body")] Article article)
         {
             if (ModelState.IsValid)
             {
