@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using ArticleViewerWebApplication.Models;
 using ArticleViewerWebApplication.Models.Entities;
 using Microsoft.AspNet.Identity;
+using Newtonsoft.Json;
 
 namespace ArticleViewerWebApplication.Controllers
 {
@@ -14,13 +15,15 @@ namespace ArticleViewerWebApplication.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Articles
         public ActionResult Index()
         {
 
             return View(db.articles.OrderByDescending(a => a.date).ToList());
         }
 
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddComment(string articleId, string text)
         {
             Comment newComment = new Comment()
@@ -40,7 +43,7 @@ namespace ArticleViewerWebApplication.Controllers
 
             article.comments.Add(newComment);
             db.SaveChanges();
-            return View("Index", db.articles.OrderByDescending(a => a.date).ToList());
+            return View("ViewArticle", article);
         }
 
 
@@ -48,11 +51,17 @@ namespace ArticleViewerWebApplication.Controllers
         {
             if (articleId != null)
             {
-                Article selectedArticle = db.articles.Where(a => a.articleId == articleId).FirstOrDefault();
+                Article selectedArticle = db.articles.Find(articleId);
 
                 if (selectedArticle == null)
                 {
                     return View("ErrorPage");
+                }
+
+                if (selectedArticle.content != null)
+                {
+                    selectedArticle.content = JsonConvert.DeserializeObject<ArticleContent>(selectedArticle.articleContent);
+                    selectedArticle.content.paragraphs.ForEach(p => p = "\t" + p);
                 }
 
                 return View(selectedArticle);

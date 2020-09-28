@@ -3,57 +3,47 @@
 @{
     ViewBag.Title = "Index";
 }
-<div class="w3-container w3-white" style="margin: 25px;">
-    <h2>Index</h2>
+<div class="w3-card w3-white" style="margin: 25px;">
+    <div style="padding: 25px">
+        <h2 class="articleTitle">My Articles</h2>
 
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.userId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.author)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.body)
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
+        <table class="table">
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.userId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.author)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.body)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.articleId }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.articleId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.articleId })
-                </td>
+                <th>
+                    <label>Title</label>
+                </th>
+                <th>
+                    <label>Date</label>
+                </th>
+                <th>
+                    <label>Preview</label>
+                </th>
+                <th></th>
             </tr>
-        }
 
-    </table>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.articlePreview)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.articleId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.articleId })
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+        <hr />
+
+        <button class="w3-button w3-border padBig" onclick="location.href = '@Url.Action("Create", "MyArticles")'; return false;">Create A New Article >></button>
+    </div>
 </div>

@@ -183,9 +183,27 @@
     <Compile Include="Migrations\202009280001208_Change1.Designer.cs">
       <DependentUpon>202009280001208_Change1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009281811090_images.cs" />
+    <Compile Include="Migrations\202009281811090_images.Designer.cs">
+      <DependentUpon>202009281811090_images.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009281850158_image-Change.cs" />
+    <Compile Include="Migrations\202009281850158_image-Change.Designer.cs">
+      <DependentUpon>202009281850158_image-Change.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009282052254_MoreChangesToArticle.cs" />
+    <Compile Include="Migrations\202009282052254_MoreChangesToArticle.Designer.cs">
+      <DependentUpon>202009282052254_MoreChangesToArticle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009282214006_Again.cs" />
+    <Compile Include="Migrations\202009282214006_Again.Designer.cs">
+      <DependentUpon>202009282214006_Again.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\.NET_Default\AccountViewModels.cs" />
     <Compile Include="Models\Entities\Article.cs" />
+    <Compile Include="Models\Entities\ArticleContent.cs" />
+    <Compile Include="Models\Entities\Image.cs" />
     <Compile Include="Models\Entities\Comment.cs" />
     <Compile Include="Models\.NET_Default\IdentityModels.cs" />
     <Compile Include="Models\.NET_Default\ManageViewModels.cs" />
@@ -249,7 +267,6 @@
     <Content Include="Views\Articles\Index.cshtml" />
     <Content Include="Views\MyArticles\Create.cshtml" />
     <Content Include="Views\MyArticles\Delete.cshtml" />
-    <Content Include="Views\MyArticles\Details.cshtml" />
     <Content Include="Views\MyArticles\Edit.cshtml" />
     <Content Include="Views\MyArticles\Index.cshtml" />
     <Content Include="Views\Articles\ViewArticle.cshtml" />
@@ -277,6 +294,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009280001208_Change1.resx">
       <DependentUpon>202009280001208_Change1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009281811090_images.resx">
+      <DependentUpon>202009281811090_images.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009281850158_image-Change.resx">
+      <DependentUpon>202009281850158_image-Change.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009282052254_MoreChangesToArticle.resx">
+      <DependentUpon>202009282052254_MoreChangesToArticle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009282214006_Again.resx">
+      <DependentUpon>202009282214006_Again.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

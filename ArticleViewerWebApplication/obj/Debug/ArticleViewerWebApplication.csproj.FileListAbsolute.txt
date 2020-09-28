@@ -328,3 +328,7 @@ C:\Users\Alexander Castro\source\repos\ArticleViewer\ArticleViewerWebApplication
 C:\Users\Alexander Castro\source\repos\ArticleViewer\ArticleViewerWebApplication\obj\Debug\ArticleViewerWebApplication.Migrations.init.resources
 C:\Users\Alexander Castro\source\repos\ArticleViewer\ArticleViewerWebApplication\obj\Debug\ArticleViewerWebApplication.csproj.GenerateResource.cache
 C:\Users\Alexander Castro\source\repos\ArticleViewer\ArticleViewerWebApplication\obj\Debug\ArticleViewerWebApplication.Migrations.Change1.resources
+C:\Users\Alexander Castro\source\repos\ArticleViewer\ArticleViewerWebApplication\obj\Debug\ArticleViewerWebApplication.Migrations.images.resources
+C:\Users\Alexander Castro\source\repos\ArticleViewer\ArticleViewerWebApplication\obj\Debug\ArticleViewerWebApplication.Migrations.imageChange.resources
+C:\Users\Alexander Castro\source\repos\ArticleViewer\ArticleViewerWebApplication\obj\Debug\ArticleViewerWebApplication.Migrations.MoreChangesToArticle.resources
+C:\Users\Alexander Castro\source\repos\ArticleViewer\ArticleViewerWebApplication\obj\Debug\ArticleViewerWebApplication.Migrations.Again.resources

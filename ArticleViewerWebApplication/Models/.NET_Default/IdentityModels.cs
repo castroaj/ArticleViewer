@@ -31,6 +31,7 @@ namespace ArticleViewerWebApplication.Models
 
         public DbSet<Article> articles { get; set; }
         public DbSet<Comment> comments { get; set; }
+        public DbSet<Image> images { get; set; }
 
         public static ApplicationDbContext Create()
         {
@@ -41,8 +42,9 @@ namespace ArticleViewerWebApplication.Models
         {
             base.OnModelCreating(modelBuilder);
 
-            //modelBuilder.Entity<Article>().HasRequired(a => a.ApplicationUser).WithMany(a => a.Articles).Map(m => m.MapKey("UserId"));
+            
         }
 
     }
+
 }

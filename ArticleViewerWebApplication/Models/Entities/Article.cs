@@ -10,6 +10,7 @@ namespace ArticleViewerWebApplication.Models
 {
     public class Article
     {
+
         [Key]
         public int articleId { get; set; }
 
@@ -23,9 +24,14 @@ namespace ArticleViewerWebApplication.Models
 
         public string articlePreview { get; set; }
 
-        public string body { get; set; }
+        [NotMapped]
+        public ArticleContent content { get; set; }
+
+        public string articleContent { get; set; }
 
         public virtual ICollection<Comment> comments { get; set; }
+
+        public virtual Image image { get; set; }
 
         public Article()
         {

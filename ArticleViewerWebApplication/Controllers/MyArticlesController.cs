@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -10,6 +11,7 @@ using ArticleViewerWebApplication.DB;
 using ArticleViewerWebApplication.Models;
 using ArticleViewerWebApplication.Models.Entities;
 using Microsoft.AspNet.Identity;
+using Newtonsoft.Json;
 
 namespace ArticleViewerWebApplication.Controllers
 {
@@ -51,13 +53,34 @@ namespace ArticleViewerWebApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "articlePreview,title,body")] Article article)
+        public ActionResult Create([Bind(Include = "articlePreview,title,body")] Article article, HttpPostedFileBase imageData, List<string> paragraphs)
         {
             if (ModelState.IsValid)
             {
+                // Configure Article metadata
                 article.userId = User.Identity.GetUserId();
                 article.date = DateTime.Now;
                 article.author = User.Identity.GetUserName();
+
+                if (imageData != null)
+                { 
+
+                    byte[] imageByteArray = ConvertToByte(imageData);
+
+                    article.image = 
+                    new Image {
+                        imageDate = DateTime.Now,
+                        imageCaption = "Caption",
+                        imageData = imageByteArray
+                    };
+                }
+
+                ArticleContent ac = new ArticleContent
+                {
+                    paragraphs = paragraphs
+                };
+
+                article.articleContent = JsonConvert.SerializeObject(ac);
 
                 db.articles.Add(article);
                 db.SaveChanges();
@@ -130,5 +153,14 @@ namespace ArticleViewerWebApplication.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public byte[] ConvertToByte(HttpPostedFileBase file)
+        {
+            byte[] imageByte = null;
+            BinaryReader rdr = new BinaryReader(file.InputStream);
+            imageByte = rdr.ReadBytes((int)file.ContentLength);
+            return imageByte;
+        }
+
     }
 }
