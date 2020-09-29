@@ -41,6 +41,12 @@ namespace ArticleViewerWebApplication.Controllers
 
             ViewBag.article = articleIdConvert;
 
+            if (article.articleContent != null)
+            {
+                article.content = JsonConvert.DeserializeObject<ArticleContent>(article.articleContent);
+                article.content.paragraphs.ForEach(p => p = "\t" + p);
+            }
+
             article.comments.Add(newComment);
             db.SaveChanges();
             return View("ViewArticle", article);
@@ -58,7 +64,7 @@ namespace ArticleViewerWebApplication.Controllers
                     return View("ErrorPage");
                 }
 
-                if (selectedArticle.content != null)
+                if (selectedArticle.articleContent != null)
                 {
                     selectedArticle.content = JsonConvert.DeserializeObject<ArticleContent>(selectedArticle.articleContent);
                     selectedArticle.content.paragraphs.ForEach(p => p = "\t" + p);

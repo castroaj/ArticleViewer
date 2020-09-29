@@ -16,7 +16,7 @@
     {
         var base64 = Convert.ToBase64String(Model.image.imageData);
         var imgSrc = String.Format("data:image/png;base64,{0}", base64);
-        <div class="w3-center">
+        <div class="w3-center" style="padding: 25px">
             <img src="@imgSrc" style="height: auto; width:60%;" />
         </div>
     }
@@ -25,13 +25,19 @@
     {
         foreach (var paragraph in Model.content.paragraphs)
         {
-            <div class="margBig padBig">
+            <div style="padding:25px;">
                 <p>@paragraph</p>
             </div>
         }
     }
 
-    <button id="commentSection-button-@Model.articleId" class="w3-button w3-border" onclick="openCommentSection('@Model.articleId')">Show Comments</button>
+    <hr />
+
+    <div>
+        <button id="commentSection-button-@Model.articleId" class="w3-button" style="vertical-align:unset" onclick="openCommentSection('@Model.articleId')">Show Comments</button>
+        <span class="w3-badge">@Model.comments.Count</span>
+    </div>
+
 
 
     <div id="commentSection-@Model.articleId" hidden>
@@ -40,11 +46,7 @@
             <div class="w3-container w3-margin">
                 <div style="margin: 5px; border:medium">
                     <div class="w3-section">
-                        <text class="body-content">@comment.text</text>
-                        <div class="w3-right">
-                            <button class="w3-button w3-border" name="likeButton-@Model.articleId">Like this Comment</button>
-                        </div>
-
+                        <text>@comment.text</text>
                     </div>
                     <div class="w3-section">
                         <span style="opacity:0.40">
@@ -52,6 +54,9 @@
                             Posted Date: @comment.date<br />
                             Likes: @comment.likes<br />
                         </span>
+                        <div class="w3-right">
+                            <button class="w3-button w3-border" name="likeButton-@Model.articleId">Like this Comment</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -70,14 +75,9 @@
                         <input name="articleId" value='@Model.articleId' hidden />
 
                         <div class="form-group">
-                            <div class="col-md-10">
-                                <label>Add Comment:</label>
-                                <input name="text" />
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
+                            <label style="display:block ruby">Add Comment:</label>
+                            <textarea name="text"></textarea>
+                            <div class="w3-right">
                                 <input type="submit" value="Comment" class="btn btn-default" />
                             </div>
                         </div>

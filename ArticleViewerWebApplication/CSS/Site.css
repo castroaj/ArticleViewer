@@ -45,3 +45,13 @@
 .padSmall {
     padding: 5px;
 }
+
+textarea.ta {
+
+    min-width: 25%;
+    max-width: 100%;
+    width: 80%;
+    height: auto;
+    min-height: 50px;
+    max-height: 500px;
+}

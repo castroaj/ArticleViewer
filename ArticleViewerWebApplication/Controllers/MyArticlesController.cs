@@ -27,27 +27,15 @@ namespace ArticleViewerWebApplication.Controllers
 
             var articles = db.articles.Where(a => a.userId.Equals(userId)).ToList();
 
-            return View(articles);
-        }
+            
 
-        // GET: MyArticles/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Article article = db.articles.Find(id);
-            if (article == null)
-            {
-                return HttpNotFound();
-            }
-            return View(article);
+            return View(articles);
         }
 
         // GET: MyArticles/Create
         public ActionResult Create()
         {
+            ViewBag.numOfParagraphs = 3;
             return View();
         }
 
@@ -90,6 +78,14 @@ namespace ArticleViewerWebApplication.Controllers
             return View(article);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ConfigureParagraphs(int numOfParagraphs)
+        {
+            ViewBag.numOfParagraphs = numOfParagraphs;
+            return View("Create");
+        }
+
         // GET: MyArticles/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -102,17 +98,39 @@ namespace ArticleViewerWebApplication.Controllers
             {
                 return HttpNotFound();
             }
+
+            if (article.articleContent != null)
+            {
+                article.content = JsonConvert.DeserializeObject<ArticleContent>(article.articleContent);
+                article.content.paragraphs.ForEach(p => p = "\t" + p);
+                ViewBag.numOfParagraphs = article.content.paragraphs.Count;
+            }
+
             return View(article);
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "articleId,userId,author,date,articlePreview,title,body")] Article article)
+        public ActionResult Edit([Bind(Include = "articleId,articlePreview,title")] Article article, List<string> paragraphs)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(article).State = EntityState.Modified;
+                ArticleContent ac = new ArticleContent
+                {
+                    paragraphs = paragraphs
+                };
+
+                
+
+                Article foundArticle = db.articles.Find(article.articleId);
+
+                foundArticle.title = article.title;
+                foundArticle.articlePreview = article.articlePreview;
+                foundArticle.articleContent = JsonConvert.SerializeObject(ac);
+
+
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -143,15 +161,6 @@ namespace ArticleViewerWebApplication.Controllers
             db.articles.Remove(article);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
 
         public byte[] ConvertToByte(HttpPostedFileBase file)
