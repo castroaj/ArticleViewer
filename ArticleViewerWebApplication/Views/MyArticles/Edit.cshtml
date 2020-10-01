@@ -12,7 +12,9 @@
             @Html.AntiForgeryToken();
 
             <label>Number of paragraphs: </label>
-            <input type="number" name="numOfParagraphs" value='@ViewBag.numOfParagraphs' min="1" max="25"/>
+            <input name="Page" value="Edit" hidden />
+            <input name="articleId" value='@Model.articleId' hidden/>
+            <input type="number" name="numOfParagraphs" value='@ViewBag.numOfParagraphs' min="1" max="25" />
             <input type="submit" class="w3-button w3-border" value="Change" />
         }
 
@@ -67,7 +69,12 @@
                             <label>Paragraph #@(i+1):</label>
                         </div>
                         <div class="col-md-10">
-                            <textarea name="[@i]" type="text" style="min-width: 25%; max-width: 100%; width: 100%; height: 100px; min-height: 50px; max-height: 500px;" required>@Model.content.paragraphs.ElementAt(i)</textarea>
+                            <textarea name="[@i]" type="text" style="min-width: 25%; max-width: 100%; width: 100%; height: 100px; min-height: 50px; max-height: 500px;" required>
+                                @if (i < Model.content.paragraphs.Count && Model.content.paragraphs.ElementAt(i) != null)
+                                {
+                                    @Model.content.paragraphs.ElementAt(i)
+                                }
+                            </textarea>
                         </div>
                     </div>
                 }

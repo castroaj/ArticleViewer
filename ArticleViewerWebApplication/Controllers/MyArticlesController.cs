@@ -7,7 +7,6 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using ArticleViewerWebApplication.DB;
 using ArticleViewerWebApplication.Models;
 using ArticleViewerWebApplication.Models.Entities;
 using Microsoft.AspNet.Identity;
@@ -80,10 +79,21 @@ namespace ArticleViewerWebApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ConfigureParagraphs(int numOfParagraphs)
+        public ActionResult ConfigureParagraphs(string page, int numOfParagraphs, int? articleId)
         {
             ViewBag.numOfParagraphs = numOfParagraphs;
+
+            if (page != null && page.Equals("Edit"))
+            {
+                Article article = db.articles.Find(articleId);
+
+                GetArticle(articleId);
+                ViewBag.numOfParagraphs = numOfParagraphs;
+
+                return View("Edit", article);
+            }
             return View("Create");
+
         }
 
         // GET: MyArticles/Edit/5
@@ -93,18 +103,8 @@ namespace ArticleViewerWebApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Article article = db.articles.Find(id);
-            if (article == null)
-            {
-                return HttpNotFound();
-            }
 
-            if (article.articleContent != null)
-            {
-                article.content = JsonConvert.DeserializeObject<ArticleContent>(article.articleContent);
-                article.content.paragraphs.ForEach(p => p = "\t" + p);
-                ViewBag.numOfParagraphs = article.content.paragraphs.Count;
-            }
+            Article article = GetArticle(id);
 
             return View(article);
         }
@@ -120,8 +120,6 @@ namespace ArticleViewerWebApplication.Controllers
                 {
                     paragraphs = paragraphs
                 };
-
-                
 
                 Article foundArticle = db.articles.Find(article.articleId);
 
@@ -170,6 +168,20 @@ namespace ArticleViewerWebApplication.Controllers
             imageByte = rdr.ReadBytes((int)file.ContentLength);
             return imageByte;
         }
+
+        public Article GetArticle(int? id)
+        {
+            Article article = db.articles.Find(id);
+
+            if (article.articleContent != null)
+            {
+                article.content = JsonConvert.DeserializeObject<ArticleContent>(article.articleContent);
+                article.content.paragraphs.ForEach(p => p = "\t" + p);
+                ViewBag.numOfParagraphs = article.content.paragraphs.Count;
+            }
+            return article;
+        }
+
 
     }
 }

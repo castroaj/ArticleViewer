@@ -171,33 +171,12 @@
     <Compile Include="Controllers\ArticlesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MyArticlesController.cs" />
-    <Compile Include="DB\ArticleViewerInitializer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202009272314350_init.cs" />
-    <Compile Include="Migrations\202009272314350_init.Designer.cs">
-      <DependentUpon>202009272314350_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202009280001208_Change1.cs" />
-    <Compile Include="Migrations\202009280001208_Change1.Designer.cs">
-      <DependentUpon>202009280001208_Change1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202009281811090_images.cs" />
-    <Compile Include="Migrations\202009281811090_images.Designer.cs">
-      <DependentUpon>202009281811090_images.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202009281850158_image-Change.cs" />
-    <Compile Include="Migrations\202009281850158_image-Change.Designer.cs">
-      <DependentUpon>202009281850158_image-Change.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202009282052254_MoreChangesToArticle.cs" />
-    <Compile Include="Migrations\202009282052254_MoreChangesToArticle.Designer.cs">
-      <DependentUpon>202009282052254_MoreChangesToArticle.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202009282214006_Again.cs" />
-    <Compile Include="Migrations\202009282214006_Again.Designer.cs">
-      <DependentUpon>202009282214006_Again.cs</DependentUpon>
+    <Compile Include="Migrations\202009302128557_init.cs" />
+    <Compile Include="Migrations\202009302128557_init.Designer.cs">
+      <DependentUpon>202009302128557_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\.NET_Default\AccountViewModels.cs" />
@@ -289,23 +268,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202009272314350_init.resx">
-      <DependentUpon>202009272314350_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202009280001208_Change1.resx">
-      <DependentUpon>202009280001208_Change1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202009281811090_images.resx">
-      <DependentUpon>202009281811090_images.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202009281850158_image-Change.resx">
-      <DependentUpon>202009281850158_image-Change.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202009282052254_MoreChangesToArticle.resx">
-      <DependentUpon>202009282052254_MoreChangesToArticle.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202009282214006_Again.resx">
-      <DependentUpon>202009282214006_Again.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202009302128557_init.resx">
+      <DependentUpon>202009302128557_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

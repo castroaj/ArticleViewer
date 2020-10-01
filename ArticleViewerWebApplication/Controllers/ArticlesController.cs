@@ -37,7 +37,7 @@ namespace ArticleViewerWebApplication.Controllers
             int articleIdConvert = int.Parse(articleId);
 
 
-            Article article = db.articles.Where(a => a.articleId == articleIdConvert).FirstOrDefault();
+            Article article = db.articles.Find(articleIdConvert);
 
             ViewBag.article = articleIdConvert;
 
@@ -46,6 +46,16 @@ namespace ArticleViewerWebApplication.Controllers
                 article.content = JsonConvert.DeserializeObject<ArticleContent>(article.articleContent);
                 article.content.paragraphs.ForEach(p => p = "\t" + p);
             }
+
+            if (article.userId.Equals(User.Identity.GetUserId()))
+            {
+                ViewBag.isCreator = true;
+            }
+            else
+            {
+                ViewBag.isCreator = false;
+            }
+
 
             article.comments.Add(newComment);
             db.SaveChanges();
@@ -69,6 +79,16 @@ namespace ArticleViewerWebApplication.Controllers
                     selectedArticle.content = JsonConvert.DeserializeObject<ArticleContent>(selectedArticle.articleContent);
                     selectedArticle.content.paragraphs.ForEach(p => p = "\t" + p);
                 }
+
+                if (selectedArticle.userId.Equals(User.Identity.GetUserId()))
+                {
+                    ViewBag.isCreator = true;
+                }
+                else
+                {
+                    ViewBag.isCreator = false;
+                }
+
 
                 return View(selectedArticle);
             }

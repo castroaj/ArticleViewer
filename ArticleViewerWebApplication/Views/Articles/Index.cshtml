@@ -6,6 +6,7 @@
 
 <link rel="stylesheet" href="~/CSS/Site.css">
 
+<link rel="stylesheet" type="text/css" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
 
 <body>
 
@@ -18,16 +19,27 @@
         <div class="w3-col 18 s12">
             <div class="w3-card-4 w3-white margSmall">
                 <div class="padBig">
-                    <div class="margSmall">
+                    <div class="w3-row margSmall">
+                        <div class="w3-right">
+                            @if (item.image != null)
+                            {
+                                var base64 = Convert.ToBase64String(item.image.imageData);
+                                var imgSrc = String.Format("data:image/png;base64,{0}", base64);
+                                <img src="@imgSrc" class="img-fluid w3-border" style="padding: 5px; margin-left: 25px;" />
+                            }
+                        </div>
+
                         <h2 class="articleTitle">
                             <b>@item.title</b>
                         </h2>
                         <h5 class="articleSubfield">Posted By: @item.author</h5>
                         <h5 class="articleSubfield">Date Posted: @item.date</h5>
-                    </div>
-                    <div class="padMed margMed">
                         <p class="articleText">@item.articlePreview</p>
+
+
                     </div>
+
+                    <hr />
 
                     <div class="padSmall">
                         <div class="w3-row">

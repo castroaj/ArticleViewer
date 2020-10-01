@@ -7,13 +7,13 @@ namespace ArticleViewerWebApplication.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class MoreChangesToArticle : IMigrationMetadata
+    public sealed partial class init : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(MoreChangesToArticle));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(init));
         
         string IMigrationMetadata.Id
         {
-            get { return "202009282052254_MoreChangesToArticle"; }
+            get { return "202009302128557_init"; }
         }
         
         string IMigrationMetadata.Source

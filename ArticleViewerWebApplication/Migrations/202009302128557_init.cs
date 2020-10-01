@@ -17,23 +17,37 @@ namespace ArticleViewerWebApplication.Migrations
                         date = c.DateTime(nullable: false),
                         title = c.String(),
                         articlePreview = c.String(),
-                        body = c.String(),
+                        articleContent = c.String(),
+                        image_imageID = c.Int(),
                     })
                 .PrimaryKey(t => t.articleId)
+                .ForeignKey("dbo.Images", t => t.image_imageID)
                 .ForeignKey("dbo.AspNetUsers", t => t.userId)
-                .Index(t => t.userId);
+                .Index(t => t.userId)
+                .Index(t => t.image_imageID);
             
             CreateTable(
                 "dbo.Comments",
                 c => new
                     {
                         commmentId = c.Int(nullable: false, identity: true),
-                        userId = c.String(),
+                        userName = c.String(),
                         date = c.DateTime(nullable: false),
                         likes = c.Int(nullable: false),
                         text = c.String(),
                     })
                 .PrimaryKey(t => t.commmentId);
+            
+            CreateTable(
+                "dbo.Images",
+                c => new
+                    {
+                        imageID = c.Int(nullable: false, identity: true),
+                        imageData = c.Binary(),
+                        imageDate = c.DateTime(nullable: false),
+                        imageCaption = c.String(),
+                    })
+                .PrimaryKey(t => t.imageID);
             
             CreateTable(
                 "dbo.AspNetRoles",
@@ -125,6 +139,7 @@ namespace ArticleViewerWebApplication.Migrations
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.Articles", "userId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.Articles", "image_imageID", "dbo.Images");
             DropForeignKey("dbo.CommentArticles", "Article_articleId", "dbo.Articles");
             DropForeignKey("dbo.CommentArticles", "Comment_commmentId", "dbo.Comments");
             DropIndex("dbo.CommentArticles", new[] { "Article_articleId" });
@@ -135,6 +150,7 @@ namespace ArticleViewerWebApplication.Migrations
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.Articles", new[] { "image_imageID" });
             DropIndex("dbo.Articles", new[] { "userId" });
             DropTable("dbo.CommentArticles");
             DropTable("dbo.AspNetUserLogins");
@@ -142,6 +158,7 @@ namespace ArticleViewerWebApplication.Migrations
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.Images");
             DropTable("dbo.Comments");
             DropTable("dbo.Articles");
         }
