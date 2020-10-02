@@ -7,7 +7,15 @@
 
 
 # Home Page:
+
+
   ![image](https://user-images.githubusercontent.com/49505648/94863590-ad610c00-0408-11eb-870e-eb17cc4f7cfa.png)
+
+# View Article
+  ![image](https://user-images.githubusercontent.com/49505648/94865220-36794280-040b-11eb-9cd7-18db17f56102.png)
+
+# Comment Section
+  ![image](https://user-images.githubusercontent.com/49505648/94865354-6f191c00-040b-11eb-85a8-924d5c54bf95.png)
 
 # My Articles:
 ![image](https://user-images.githubusercontent.com/49505648/94863934-36784300-0409-11eb-90d9-cb900f2b5a96.png)
